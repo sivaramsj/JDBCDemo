@@ -10,4 +10,8 @@ public class App {
         for(Employees emp : service.getAllEmployees())
             System.out.println(emp);
     }
+
+    public static  void createEmployee(){
+        service.createEmployee();
+    }
 }

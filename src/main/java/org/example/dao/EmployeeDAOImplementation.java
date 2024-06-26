@@ -3,10 +3,7 @@ package org.example.dao;
 import org.example.connection.DBconnection;
 import org.example.models.Employees;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +15,23 @@ public class EmployeeDAOImplementation implements EmployeeDAO<Employees>{
     }
 
     @Override
-    public Employees create() {
-        return null;
+    public Employees create(Employees employee) {
+        String query = "insert into employees(EmployeeID,FirstName,LastName,BirthDate,Photo,Notes) value (?,?,?,?,?,?)";
+        try {
+            PreparedStatement pt = conn.prepareStatement(query);
+            pt.setInt(1,employee.getEmployee_id());
+            pt.setString(2,employee.getFirst_name());
+            pt.setString(3,employee.getLast_name());
+            pt.setString(4,employee.getBirth_date());
+            pt.setString(5,employee.getPhoto());
+            pt.setString(6,employee.getNotes());
+            int rows = pt.executeUpdate();
+            System.out.println("No.of Rows affected : "+rows);
+            return  employee;
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+       return  null;
     }
 
     @Override

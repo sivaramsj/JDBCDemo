@@ -12,6 +12,11 @@ public class EmployeeService {
         this.dao = new EmployeeDAOImplementation();
     }
 
+    //create new employee
+    public void createEmployee(){
+        Employees emp = new Employees(11,"siva","ram","2001-02-04","EmpID11.pic","Pro coder");
+        System.out.println(dao.create(emp).getFirst_name()+" is created Successfully");;
+    }
 
     // get all Employees as a list
     public List<Employees> getAllEmployees(){
