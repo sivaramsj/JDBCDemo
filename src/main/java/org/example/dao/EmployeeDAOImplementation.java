@@ -35,7 +35,18 @@ public class EmployeeDAOImplementation implements EmployeeDAO<Employees>{
     }
 
     @Override
-    public Employees get() {
+    public Employees get(int id) {
+        String query = "Select * from employees where employeeId = "+id;
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            if(rs.next()) {
+                Employees emp = new Employees(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                return emp;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return  null;
     }
 
@@ -73,13 +84,39 @@ public class EmployeeDAOImplementation implements EmployeeDAO<Employees>{
 
 
     @Override
-    public Employees update() {
-        return null;
+    public boolean update(Employees emp) {
+        String query = "Update Employees set FirstName = ?, LastName = ?, BirthDate = ?, Photo = ?, Notes = ? Where EmployeeID = ?";
+        try {
+            PreparedStatement pt = conn.prepareStatement(query);
+            pt.setString(1,emp.getFirst_name());
+            pt.setString(2,emp.getLast_name());
+            pt.setString(3,emp.getBirth_date());
+            pt.setString(4,emp.getPhoto());
+            pt.setString(5,emp.getNotes());
+            pt.setInt(6,emp.getEmployee_id());
+            int rows =  pt.executeUpdate();
+            if(rows > 0)
+                return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 
     @Override
-    public Employees delete() {
-        return null;
+    public boolean delete(int id) {
+        String query = "delete from employees where EmployeeId = "+id;
+        try {
+            Statement st = conn.createStatement();
+            int rows = st.executeUpdate(query);
+            if(rows > 0)
+                return true;
+        } catch (SQLException e) {
+           e.getMessage();
+        }
+
+        return false;
+
     }
 
 }

@@ -72,7 +72,7 @@ public class Employees {
 
     @Override
     public String toString(){
-        return "{\"Employee_id\" : " + this.employee_id + ", \"FirstName\" : " + this.first_name + ", \"LastName :\" " + this.last_name + ", \"BirthDate\" : " + this.birth_date + ", \"Photo\" : " + this.photo + ", \"Notes\" : " + this.notes +" }";
+        return "{\"Employee_id\" : " + this.employee_id + ", \"FirstName\" : " + this.first_name + ", \"LastName\" : " + this.last_name + ", \"BirthDate\" : " + this.birth_date + ", \"Photo\" : " + this.photo + ", \"Notes\" : " + this.notes +" }";
     }
 
 }

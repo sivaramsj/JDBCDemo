@@ -18,9 +18,28 @@ public class EmployeeService {
         System.out.println(dao.create(emp).getFirst_name()+" is created Successfully");;
     }
 
+    public Employees getEmployee(){
+        Employees emp = dao.get(1);
+        return emp;
+    }
+
     // get all Employees as a list
     public List<Employees> getAllEmployees(){
         List<Employees> employees = dao.getAll();
         return  employees;
+    }
+
+    // update employee
+    public boolean updateEmployee(){
+        String update_notes = "Good Person";
+        Employees emp = this.dao.get(2);
+        emp.setNotes(update_notes);
+
+        return dao.update(emp);
+    }
+
+    // delete employee
+    public boolean deleteEmployee(){
+        return dao.delete(11);
     }
 }
